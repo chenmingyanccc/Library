@@ -17,7 +17,7 @@ namespace LibraryMIS.database
 		{
 			get
 			{
-                return "server=MS-20160107RORB\\SQL2005;database=book;uid=sa;pwd=123321";
+                return "Data Source=.;Initial Catalog=LIBRARYMIS;Integrated Security=True";
             }
 		}
 	}

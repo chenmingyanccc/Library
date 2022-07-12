@@ -1,4 +1,4 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WebForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,7 +26,7 @@ namespace LibraryMIS
             rsource.Name = "DataSet1";
             rsource.Value = dt;
             this.reportViewer1.LocalReport.DataSources.Clear();
-            this.reportViewer1.LocalReport.DataSources.Add(rsource);
+            //this.reportViewer1.LocalReport.DataSources.Add(rsource);
             this.reportViewer1.RefreshReport();
         }
     }
