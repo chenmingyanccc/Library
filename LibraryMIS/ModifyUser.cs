@@ -74,25 +74,25 @@ namespace LibraryMIS
             // 
             this.groupBox1.Controls.Add(this.radioWork);
             this.groupBox1.Controls.Add(this.radioManage);
-            this.groupBox1.Location = new System.Drawing.Point(24, 56);
+            this.groupBox1.Location = new System.Drawing.Point(32, 72);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(184, 48);
+            this.groupBox1.Size = new System.Drawing.Size(245, 62);
             this.groupBox1.TabIndex = 54;
             this.groupBox1.TabStop = false;
             // 
             // radioWork
             // 
-            this.radioWork.Location = new System.Drawing.Point(24, 16);
+            this.radioWork.Location = new System.Drawing.Point(32, 21);
             this.radioWork.Name = "radioWork";
-            this.radioWork.Size = new System.Drawing.Size(64, 24);
+            this.radioWork.Size = new System.Drawing.Size(85, 30);
             this.radioWork.TabIndex = 1;
             this.radioWork.Text = "工作员";
             // 
             // radioManage
             // 
-            this.radioManage.Location = new System.Drawing.Point(96, 16);
+            this.radioManage.Location = new System.Drawing.Point(128, 21);
             this.radioManage.Name = "radioManage";
-            this.radioManage.Size = new System.Drawing.Size(64, 24);
+            this.radioManage.Size = new System.Drawing.Size(85, 30);
             this.radioManage.TabIndex = 0;
             this.radioManage.Text = "管理员";
             // 
@@ -101,10 +101,10 @@ namespace LibraryMIS
             this.textName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textName.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textName.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.textName.Location = new System.Drawing.Point(86, 16);
+            this.textName.Location = new System.Drawing.Point(115, 21);
             this.textName.Name = "textName";
             this.textName.ReadOnly = true;
-            this.textName.Size = new System.Drawing.Size(120, 21);
+            this.textName.Size = new System.Drawing.Size(160, 25);
             this.textName.TabIndex = 46;
             // 
             // label1
@@ -112,9 +112,9 @@ namespace LibraryMIS
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label1.Location = new System.Drawing.Point(22, 24);
+            this.label1.Location = new System.Drawing.Point(29, 31);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.Size = new System.Drawing.Size(67, 15);
             this.label1.TabIndex = 51;
             this.label1.Text = "用户名称";
             // 
@@ -123,9 +123,9 @@ namespace LibraryMIS
             this.btClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btClose.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btClose.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btClose.Location = new System.Drawing.Point(136, 128);
+            this.btClose.Location = new System.Drawing.Point(181, 165);
             this.btClose.Name = "btClose";
-            this.btClose.Size = new System.Drawing.Size(75, 23);
+            this.btClose.Size = new System.Drawing.Size(100, 29);
             this.btClose.TabIndex = 50;
             this.btClose.Text = "退出";
             this.btClose.Click += new System.EventHandler(this.btClose_Click);
@@ -135,18 +135,18 @@ namespace LibraryMIS
             this.btModify.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btModify.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btModify.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btModify.Location = new System.Drawing.Point(24, 128);
+            this.btModify.Location = new System.Drawing.Point(32, 165);
             this.btModify.Name = "btModify";
-            this.btModify.Size = new System.Drawing.Size(75, 23);
+            this.btModify.Size = new System.Drawing.Size(100, 29);
             this.btModify.TabIndex = 49;
             this.btModify.Text = "修改";
             this.btModify.Click += new System.EventHandler(this.btModify_Click);
             // 
             // ModifyUser
             // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(6, 14);
+            this.AutoScaleBaseSize = new System.Drawing.Size(8, 18);
             this.BackColor = System.Drawing.Color.Snow;
-            this.ClientSize = new System.Drawing.Size(232, 166);
+            this.ClientSize = new System.Drawing.Size(255, 192);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.textName);
             this.Controls.Add(this.label1);
@@ -172,9 +172,9 @@ namespace LibraryMIS
 				oleConnection1.Open();
 				string sql;
 				if (radioManage.Checked==true)
-					sql = "update manager set manage=true,work=false,query=false where MName='"+textName.Text.Trim()+"'";
+					sql = "update manager set manage=0,work=1,query=1 where MName='"+textName.Text.Trim()+"'";
 				else
-					sql = "update manager set manage=false,work=true,query=false where MName='"+textName.Text.Trim()+"'";
+					sql = "update manager set manage=1,work=0,query=1 where MName='"+textName.Text.Trim()+"'";
 
 				SqlCommand cmd = new SqlCommand(sql,oleConnection1);
 				cmd.ExecuteNonQuery();

@@ -17,7 +17,7 @@ namespace LibraryMIS.database
 		{
 			get
 			{
-                return "Data Source=.;Initial Catalog=LIBRARYMIS;Integrated Security=True";
+                return @"Data Source =.; Initial Catalog = Hotel; Integrated Security = True";
             }
 		}
 	}
