@@ -183,7 +183,7 @@ namespace LibraryMIS
 			if (dataGrid1.CurrentRowIndex>=0&&dataGrid1.DataSource!=null&&dataGrid1[dataGrid1.CurrentCell]!=null)
 			{
 				oleConnection1.Open();
-				string sql="delete * from manager where MName = '"+ds.Tables["user"].Rows[dataGrid1.CurrentCell.RowNumber][0].ToString().Trim()+"'";
+				string sql="delete from manager where MName = '"+ds.Tables["user"].Rows[dataGrid1.CurrentCell.RowNumber][0].ToString().Trim()+"'";
 				SqlCommand cmd = new SqlCommand(sql,oleConnection1);
 				cmd.ExecuteNonQuery();
 				MessageBox.Show("删除用户'"+ds.Tables[0].Rows[dataGrid1.CurrentCell.RowNumber][0].ToString().Trim()+"'成功","提示");

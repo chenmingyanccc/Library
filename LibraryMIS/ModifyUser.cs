@@ -172,9 +172,9 @@ namespace LibraryMIS
 				oleConnection1.Open();
 				string sql;
 				if (radioManage.Checked==true)
-					sql = "update manager set manage=true,work=false,query=false where MName='"+textName.Text.Trim()+"'";
+					sql = "update manager set manage=0,work=1,query=1 where MName='"+textName.Text.Trim()+"'";
 				else
-					sql = "update manager set manage=false,work=true,query=false where MName='"+textName.Text.Trim()+"'";
+					sql = "update manager set manage=1,work=0,query=1 where MName='"+textName.Text.Trim()+"'";
 
 				SqlCommand cmd = new SqlCommand(sql,oleConnection1);
 				cmd.ExecuteNonQuery();

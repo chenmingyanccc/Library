@@ -220,7 +220,7 @@ namespace LibraryMIS
 				else
 				{
 					dr.Close();
-					sql = "delete * from type where type not in(select distinct type from book) and TID "+
+					sql = "delete from type where type not in(select distinct type from book) and TID "+
 						"= "+ds.Tables["type"].Rows[dataGrid1.CurrentCell.RowNumber][2].ToString().Trim()+"";
 					cmd.CommandText = sql;
 					cmd.ExecuteNonQuery();

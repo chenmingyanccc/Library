@@ -227,7 +227,7 @@ namespace LibraryMIS
 				else
 				{
 					dr.Close();
-					sql = "delete * from book where BID not in(select distinct BID from bookOut) and BID "+
+					sql = "delete from book where BID not in(select distinct BID from bookOut) and BID "+
 						"= '"+ds.Tables["book"].Rows[dataGrid1.CurrentCell.RowNumber][0].ToString().Trim()+"'";
 					cmd.CommandText = sql;
 					cmd.ExecuteNonQuery();
