@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using System.Data;
 using System.Data.SqlClient;
+using LibraryMIS.BLL;
 
 namespace LibraryMIS
 {
@@ -211,35 +212,27 @@ namespace LibraryMIS
 		}
 
 		private void btDel_Click(object sender, System.EventArgs e)
-		{
-			if (dataGrid1.CurrentRowIndex>=0&&dataGrid1.DataSource!=null&&dataGrid1[dataGrid1.CurrentCell]!=null)
-			{
-				oleConnection1.Open();
-				string sql="select * from bookOut where BID='"+ds.Tables["book"].Rows[dataGrid1.CurrentCell.RowNumber][0].ToString().Trim()+"'";
-				SqlCommand cmd = new SqlCommand(sql,oleConnection1);
-				SqlDataReader dr;
-				dr = cmd.ExecuteReader();
-				if (dr.Read())
-				{
-					MessageBox.Show("删除图书'"+ds.Tables["book"].Rows[dataGrid1.CurrentCell.RowNumber][1].ToString().Trim()+"'失败，该图书正在流通中！","提示");
-					dr.Close();
-				} 
-				else
-				{
-					dr.Close();
-					sql = "delete from book where BID not in(select distinct BID from bookOut) and BID "+
-						"= '"+ds.Tables["book"].Rows[dataGrid1.CurrentCell.RowNumber][0].ToString().Trim()+"'";
-					cmd.CommandText = sql;
-					cmd.ExecuteNonQuery();
-					MessageBox.Show("删除图书'"+ds.Tables[0].Rows[dataGrid1.CurrentCell.RowNumber][1].ToString().Trim()+"'成功","提示");
-				}
-				oleConnection1.Close();
-			} 
-			else
-				return;
-		}
+        {
+            int a1 = dataGrid1.CurrentRowIndex;
+            object a2 = dataGrid1.DataSource;
+            object a3 = dataGrid1[dataGrid1.CurrentCell];
+            object a4 = ds.Tables["book"].Rows[dataGrid1.CurrentCell.RowNumber][0].ToString().Trim();
 
-		private void btClose_Click(object sender, System.EventArgs e)
+            try
+            {
+                BookDelete lete = new BookDelete();
+                lete.DeleteBook(a1, a2, a3, a4);
+                MessageBox.Show("删除成功", "提示");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("删除成功", "异常");
+            }
+        }
+
+
+
+        private void btClose_Click(object sender, System.EventArgs e)
 		{
 			this.Close();
 		}

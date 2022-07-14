@@ -168,6 +168,7 @@
     </Compile>
     <Compile Include="BLL\Addbookq.cs" />
     <Compile Include="BLL\Addtypes.cs" />
+    <Compile Include="BLL\BookDelete.cs" />
     <Compile Include="BLL\ModifyBooks.cs" />
     <Compile Include="BLL\Modifytypes.cs" />
     <Compile Include="BLL\TypeDelete.cs" />
