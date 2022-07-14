@@ -367,7 +367,7 @@ namespace LibraryMIS
 				else
 				{
 					sql="insert into book values ('"+textID.Text.Trim()+"','"+textName.Text.Trim()+"','"+textWriter.Text.Trim()+"',"+
-						"'"+textPublish.Text.Trim()+"','"+date1.Value+"','"+textPrice.Text.Trim()+"','"+textNum.Text.Trim()+"',"+
+						"'"+textPublish.Text.Trim()+"','"+date1.Text.Trim()+"','"+textPrice.Text.Trim()+"','"+textNum.Text.Trim()+"',"+
 						"'"+comboType.Text.Trim()+"','"+textRemark.Text.Trim()+"')";
 					cmd.CommandText=sql;
 					cmd.ExecuteNonQuery();
