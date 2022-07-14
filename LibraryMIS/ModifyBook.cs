@@ -341,7 +341,7 @@ namespace LibraryMIS
 			{
 				oleConnection1.Open();
 				string sql = "update book set BName='"+textName.Text.Trim()+"',BWriter='"+textWriter.Text.Trim()+"',BPublish='"+textPublish.Text.Trim()+"',"+ 
-					"BDate='"+date1.Text.Trim()+"',BNum='"+textNum.Text.Trim()+"',BPrice='"+textPrice.Text.Trim()+"',BRemark='"+textRemark.Text.Trim()+"'"+
+					"BDate='"+date1.Value+"',BNum='"+textNum.Text.Trim()+"',BPrice='"+textPrice.Text.Trim()+"',BRemark='"+textRemark.Text.Trim()+"'"+
 					" where BID='"+textID.Text.Trim()+"'";
 				SqlCommand cmd = new SqlCommand(sql,oleConnection1);
 				cmd.ExecuteNonQuery();

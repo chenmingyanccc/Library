@@ -239,10 +239,10 @@ namespace LibraryMIS
 					{
 						if (radioManage.Checked==true)
 							sql =  "insert into manager "+
-								"values ('"+textName.Text.Trim()+"','"+textPWDNew.Text.Trim()+"',true,false,false)";
+								"values ('"+textName.Text.Trim()+"','"+textPWDNew.Text.Trim()+"',0,1,1)";
 						else
 							sql =  "insert into manager "+
-								"values ('"+textName.Text.Trim()+"','"+textPWDNew.Text.Trim()+"',false,true,false)";
+								"values ('"+textName.Text.Trim()+"','"+textPWDNew.Text.Trim()+"',1,0,1)";
 						
 						cmd.CommandText = sql;
 						cmd.ExecuteNonQuery();
