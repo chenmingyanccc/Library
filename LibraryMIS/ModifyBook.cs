@@ -4,6 +4,7 @@ using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using LibraryMIS.BLL;
 
 namespace LibraryMIS
 {
@@ -334,24 +335,30 @@ namespace LibraryMIS
 		#endregion
 
 		private void btAdd_Click(object sender, System.EventArgs e)
-		{
-			if (textName.Text.Trim()==""||textWriter.Text.Trim()==""||textNum.Text.Trim()=="")
-				MessageBox.Show("请填写完整信息","提示");
-			else
+        {
+            string ID = textID.Text.Trim();
+            string Name = textName.Text.Trim();
+            string Num = textNum.Text.Trim();
+            string Writer = textWriter.Text.Trim();
+            string Publish = textPublish.Text.Trim();
+            string Price = textPrice.Text.Trim();
+            string Remark = textRemark.Text.Trim();
+            DateTime datee = date1.Value;
+
+			try
 			{
-				oleConnection1.Open();
-				string sql = "update book set BName='"+textName.Text.Trim()+"',BWriter='"+textWriter.Text.Trim()+"',BPublish='"+textPublish.Text.Trim()+"',"+ 
-					"BDate='"+date1.Value+"',BNum='"+textNum.Text.Trim()+"',BPrice='"+textPrice.Text.Trim()+"',BRemark='"+textRemark.Text.Trim()+"'"+
-					" where BID='"+textID.Text.Trim()+"'";
-				SqlCommand cmd = new SqlCommand(sql,oleConnection1);
-				cmd.ExecuteNonQuery();
-				MessageBox.Show("修改成功","提示");
-				this.Close();
-				oleConnection1.Close();
+				ModifyBooks books = new ModifyBooks();
+				books.ModifyNewBooks(ID, Name, Num, Writer, Publish, Price, Remark, datee);
+				MessageBox.Show("修改图书成功！", "提示");
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("修改图书成功！", "异常");
 			}
 		}
 
-		private void btClose_Click(object sender, System.EventArgs e)
+
+        private void btClose_Click(object sender, System.EventArgs e)
 		{
 			this.Close();
 		}
