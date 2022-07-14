@@ -83,5 +83,29 @@ namespace LibraryMIS.BLL
             oleConnection1.Close();
             MessageBox.Show("删除用户'" + ds.Tables[0].Rows[x][0].ToString().Trim() + "'成功", "提示");
         }
+        public void show(string text,int x)
+        {
+            text = ds.Tables[0].Rows[x][0].ToString().Trim();
+        }
+        public void userxg(bool manager, bool work,string text)
+        {
+            if (manager == false && work == false)
+                MessageBox.Show("请选择权限", "提示");
+            else
+            {
+                oleConnection1.Open();
+                string sql;
+                if (manager == true)
+                    sql = "update manager set manage=0,work=1,query=1 where MName='" + text + "'";
+                else
+                    sql = "update manager set manage=1,work=0,query=1 where MName='" + text + "'";
+                
+                SqlCommand cmd = new SqlCommand(sql, oleConnection1);
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("修改成功", "提示");
+
+                oleConnection1.Close();
+            }
+        }
     }
 }

@@ -169,14 +169,17 @@ namespace LibraryMIS
 		private void btModify_Click(object sender, System.EventArgs e)
 		{
 			if (dataGrid1.CurrentRowIndex>=0&&dataGrid1.DataSource!=null&&dataGrid1[dataGrid1.CurrentCell]!=null)
-			{
-				modifyUser = new ModifyUser();
-				modifyUser.textName.Text = ds.Tables[0].Rows[dataGrid1.CurrentCell.RowNumber][0].ToString().Trim();
-				modifyUser.ShowDialog();
-			}
-		}
-        
-		private void btDel_Click(object sender, System.EventArgs e)
+            {
+                modifyUser = new ModifyUser();
+                string text = modifyUser.textName.Text.Trim();
+                int x = dataGrid1.CurrentCell.RowNumber;
+                ser.show(text, x);
+                modifyUser.ShowDialog();
+            }
+        }
+
+
+        private void btDel_Click(object sender, System.EventArgs e)
 		{
 			if (dataGrid1.CurrentRowIndex>=0&&dataGrid1.DataSource!=null&&dataGrid1[dataGrid1.CurrentCell]!=null)
             {

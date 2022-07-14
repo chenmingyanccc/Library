@@ -4,6 +4,7 @@ using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using LibraryMIS.BLL;
 
 namespace LibraryMIS
 {
@@ -24,6 +25,7 @@ namespace LibraryMIS
 		/// </summary>
 		private System.ComponentModel.Container components = null;
 		private SqlConnection oleConnection1 = null;
+        YH service = new YH();
 
 		public ModifyUser()
 		{
@@ -82,6 +84,7 @@ namespace LibraryMIS
             // 
             // radioWork
             // 
+            this.radioWork.Cursor = System.Windows.Forms.Cursors.Default;
             this.radioWork.Location = new System.Drawing.Point(32, 21);
             this.radioWork.Name = "radioWork";
             this.radioWork.Size = new System.Drawing.Size(85, 30);
@@ -103,8 +106,7 @@ namespace LibraryMIS
             this.textName.ForeColor = System.Drawing.SystemColors.ControlText;
             this.textName.Location = new System.Drawing.Point(115, 21);
             this.textName.Name = "textName";
-            this.textName.ReadOnly = true;
-            this.textName.Size = new System.Drawing.Size(160, 25);
+            this.textName.Size = new System.Drawing.Size(160, 21);
             this.textName.TabIndex = 46;
             // 
             // label1
@@ -114,7 +116,7 @@ namespace LibraryMIS
             this.label1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.label1.Location = new System.Drawing.Point(29, 31);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 15);
+            this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 51;
             this.label1.Text = "用户名称";
             // 
@@ -164,26 +166,14 @@ namespace LibraryMIS
 		#endregion
 
 		private void btModify_Click(object sender, System.EventArgs e)
-		{
-			if (radioManage.Checked==false&&radioWork.Checked==false)
-				MessageBox.Show("请选择权限","提示");
-			else
-			{
-				oleConnection1.Open();
-				string sql;
-				if (radioManage.Checked==true)
-					sql = "update manager set manage=0,work=1,query=1 where MName='"+textName.Text.Trim()+"'";
-				else
-					sql = "update manager set manage=1,work=0,query=1 where MName='"+textName.Text.Trim()+"'";
+        {
+            bool manager = radioManage.Checked;
+            bool work = radioWork.Checked;
+            string text = textName.Text.Trim();
+            service.userxg(manager, work, text);
+        }
 
-				SqlCommand cmd = new SqlCommand(sql,oleConnection1);
-				cmd.ExecuteNonQuery();
-				MessageBox.Show("修改成功","提示");
-				this.Close();
-				
-				oleConnection1.Close();
-			}
-		}
+
 
         private void ModifyUser_Load(object sender, EventArgs e)
         {
