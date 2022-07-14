@@ -15,7 +15,8 @@ namespace LibraryMIS.BLL
 
         public void Createbook(string ID, string Name, string Num, string Writer, string Publish, string Price, string Type, string Remark, DateTime datee)
         {
-            if (ID == "" || Name == "" || textNum.Text.Trim() == "" || Writer == "")
+            this.oleConnection1 = new SqlConnection(LibraryMIS.database.dbConnection.connection);
+            if (ID == "" || Name == "" || Num == "" || Writer == "")
                 //MessageBox.Show("请填写完整信息","提示");
                 throw new Exception("请填写完整信息");
             else
