@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using System.Data;
 using System.Data.SqlClient;
+using LibraryMIS.BLL;
 
 namespace LibraryMIS
 {
@@ -204,35 +205,27 @@ namespace LibraryMIS
 		}
 
 		private void btDel_Click(object sender, System.EventArgs e)
-		{
-			if (dataGrid1.CurrentRowIndex>=0&&dataGrid1.DataSource!=null&&dataGrid1[dataGrid1.CurrentCell]!=null)
-			{
-				oleConnection1.Open();
-				string sql="select * from book where type='"+ds.Tables["type"].Rows[dataGrid1.CurrentCell.RowNumber][0].ToString().Trim()+"'";
-				SqlCommand cmd = new SqlCommand(sql,oleConnection1);
-				SqlDataReader dr;
-				dr = cmd.ExecuteReader();
-				if (dr.Read())
-				{
-					MessageBox.Show("删除类型'"+ds.Tables["type"].Rows[dataGrid1.CurrentCell.RowNumber][0].ToString().Trim()+"'失败，请先删掉该类型图书！","提示");
-					dr.Close();
-				} 
-				else
-				{
-					dr.Close();
-					sql = "delete from type where type not in(select distinct type from book) and TID "+
-						"= "+ds.Tables["type"].Rows[dataGrid1.CurrentCell.RowNumber][2].ToString().Trim()+"";
-					cmd.CommandText = sql;
-					cmd.ExecuteNonQuery();
-					MessageBox.Show("删除类型'"+ds.Tables[0].Rows[dataGrid1.CurrentCell.RowNumber][0].ToString().Trim()+"'成功","提示");
-				}
-				oleConnection1.Close();
-			} 
-			else
-				return;
-		}
+        {
+            int a1 = dataGrid1.CurrentRowIndex;
+            object a2 = dataGrid1.DataSource;
+            object a3 = dataGrid1[dataGrid1.CurrentCell];
+            object a4 = ds.Tables["type"].Rows[dataGrid1.CurrentCell.RowNumber][0].ToString().Trim();
+            object a5 = ds.Tables["type"].Rows[dataGrid1.CurrentCell.RowNumber][2].ToString().Trim();
 
-		private void btClose_Click(object sender, System.EventArgs e)
+            try
+            {
+                TypeDelete ete = new TypeDelete();
+                ete.DeleteType(a1, a2, a3, a4, a5);
+                MessageBox.Show("删除成功", "提示");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("删除成功", "异常");
+            }
+        }
+
+
+        private void btClose_Click(object sender, System.EventArgs e)
 		{
 			this.Close();
 		}
