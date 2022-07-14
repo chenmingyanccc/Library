@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using System.Data;
 using System.Data.SqlClient;
+using LibraryMIS.BLL;
 
 namespace LibraryMIS
 {
@@ -354,31 +355,32 @@ namespace LibraryMIS
 		}
 
 		private void btAdd_Click(object sender, System.EventArgs e)
-		{
-			if (textID.Text.Trim()==""||textName.Text.Trim()==""||textNum.Text.Trim()==""||textWriter.Text.Trim()=="")
-				MessageBox.Show("请填写完整信息","提示");
-			else
+        {
+            string ID = textID.Text.Trim();
+            string Name = textName.Text.Trim();
+            string Num = textNum.Text.Trim();
+            string Writer = textWriter.Text.Trim();
+            string Publish = textPublish.Text.Trim();
+            string Price = textPrice.Text.Trim();
+            string Type = comboType.Text.Trim();
+            string Remark = textRemark.Text.Trim();
+            DateTime datee = date1.Value;
+			try
 			{
-				oleConnection1.Open();
-				string sql="select * from book where BID='"+textID.Text.Trim()+"'";
-				SqlCommand cmd = new SqlCommand(sql,oleConnection1);
-				if (null!=cmd.ExecuteScalar())
-					MessageBox.Show("图书编号重复","提示");
-				else
-				{
-					sql="insert into book values ('"+textID.Text.Trim()+"','"+textName.Text.Trim()+"','"+textWriter.Text.Trim()+"',"+
-						"'"+textPublish.Text.Trim()+"','"+date1.Value+"','"+textPrice.Text.Trim()+"','"+textNum.Text.Trim()+"',"+
-						"'"+comboType.Text.Trim()+"','"+textRemark.Text.Trim()+"')";
-					cmd.CommandText=sql;
-					cmd.ExecuteNonQuery();
-					MessageBox.Show("添加成功","提示");
-					clear();
-				}
-				oleConnection1.Close();
+				Addbookq bookq = new Addbookq();
+				bookq.Createbook(ID, Name, Num, Writer, Publish, Price, Type, Remark, datee);
+				MessageBox.Show("添加图书成功！", "提示");
 			}
-		}
+			catch (Exception ex)
+			{
+				MessageBox.Show("添加图书成功！", "异常");
+			}
+        }
 
-		private void clear()
+
+
+
+        private void clear()
 		{
 			textID.Text="";
 			textName.Text="";
