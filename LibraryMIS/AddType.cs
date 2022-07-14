@@ -4,6 +4,7 @@ using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using LibraryMIS.BLL;
 
 namespace LibraryMIS
 {
@@ -165,30 +166,26 @@ namespace LibraryMIS
 		#endregion
 
 		private void btAdd_Click(object sender, System.EventArgs e)
-		{
-			if (textName.Text.Trim()==""||textRemark.Text.Trim()=="")
-				MessageBox.Show("请填写完整信息","提示");
-			else
+        {
+            string Name = textName.Text.Trim();
+            string Remark = textRemark.Text.Trim();
+
+			try
 			{
-				oleConnection1.Open();
-				string sql = "select * from type where type='"+textName.Text.Trim()+"'";
-				SqlCommand cmd = new SqlCommand(sql,oleConnection1);
-				if (null!=cmd.ExecuteScalar())
-					MessageBox.Show("类型重复，请重新输入！","提示");
-				else
-				{
-					sql="insert into type (type,tRemark) values ('"+textName.Text.Trim()+"','"+textRemark.Text.Trim()+"')";
-					cmd.CommandText = sql;
-					cmd.ExecuteNonQuery();
-					MessageBox.Show("类型添加成功！","提示");
-					textName.Clear();
-					textRemark.Clear();
-				}
-				oleConnection1.Close();
+
+				Addtypes ype = new Addtypes();
+				ype.CreateType(Name, Remark);
+				MessageBox.Show("添加用户成功！", "提示");
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("添加用户成功！", "异常");
 			}
 		}
 
-		private void btClose_Click(object sender, System.EventArgs e)
+
+
+        private void btClose_Click(object sender, System.EventArgs e)
 		{
 			this.Close();
 		}
