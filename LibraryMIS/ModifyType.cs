@@ -4,6 +4,7 @@ using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using LibraryMIS.BLL;
 
 namespace LibraryMIS
 {
@@ -165,29 +166,26 @@ namespace LibraryMIS
 		#endregion
 
 		private void btAdd_Click(object sender, System.EventArgs e)
-		{
-			if (textName.Text.Trim()==""||textRemark.Text.Trim()=="")
-				MessageBox.Show("请填写完整信息","提示");
-			else
+        {
+            string Name = textName.Text.Trim();
+            string Remark = textRemark.Text.Trim();
+            string Tag = this.Tag.ToString().Trim();
+
+			try
 			{
-				oleConnection1.Open();
-				string sql = "select * from type where [type] ='"+textName.Text.Trim()+"' and TID<>"+this.Tag.ToString().Trim()+"";
-				SqlCommand cmd = new SqlCommand(sql,oleConnection1);
-				if (null!=cmd.ExecuteScalar())
-					MessageBox.Show("类型重复","提示");
-				else
-				{
-					sql = "update type set [type]='"+textName.Text.Trim()+"',tRemark='"+textRemark.Text.Trim()+"' where TID="+this.Tag.ToString().Trim()+"";
-					cmd.CommandText=sql;
-					cmd.ExecuteNonQuery();
-					MessageBox.Show("修改成功","提示");
-					this.Close();
-				}
-				oleConnection1.Close();
+				Modifytypes types = new Modifytypes();
+				types.ModifynewType(Name, Remark, Tag);
+				MessageBox.Show("修改成功");
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("修改成功！", "异常");
 			}
 		}
 
-		private void btClose_Click(object sender, System.EventArgs e)
+
+
+        private void btClose_Click(object sender, System.EventArgs e)
 		{
 			this.Close();
 		}

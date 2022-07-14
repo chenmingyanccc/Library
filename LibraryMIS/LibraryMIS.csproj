@@ -167,6 +167,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BLL\Addtypes.cs" />
+    <Compile Include="BLL\Modifytypes.cs" />
     <Compile Include="Book.cs">
       <SubType>Form</SubType>
     </Compile>
